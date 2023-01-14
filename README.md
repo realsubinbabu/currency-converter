@@ -33,4 +33,4 @@ As of now, this application only supports conversion of 4 currencies (USD, EUR, 
 - Subin Babu
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the GNU Lesser General Public License v3.0.
