@@ -13,7 +13,7 @@ A simple application that allows users to convert over 158 currencies in the wor
 
 ## Installation
 1. Clone the repository
-2. Open the index.html file in the browser
+2. Open the currency.html file in the browser
 
 ## Usage
 1. Enter the amount you want to convert
