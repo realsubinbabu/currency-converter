@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+      /* Add custom styles here */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center my-5">Currency Converter</h1>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <form>
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="text" class="form-control" id="amount">
+            </div>
+            <div class="form-group">
+              <label for="from_currency">From Currency</label>
+              <select class="form-control" id="from_currency">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="INR">INR</option>           
+                <!-- Add more options for currencies -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="to_currency">To Currency</label>
+              <select class="form-control" id="to_currency">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="GBP">GBP</option>
+                <option value="INR">INR</option>
+                <!-- Add more options for currencies -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="converted_amount">Converted Currency</label>
+              <input type="text" class="form-control" id="converted_amount" disabled>
+            </div>
+            <button type="submit" class="btn btn-primary" id="convert_btn">Convert</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/[email protected]/dist/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <script>
+      // Get references to the form elements
+      const amountInput = document.getElementById('amount');
+      const fromCurrencySelect = document.getElementById('from_currency');
+      const toCurrencySelect = document.getElementById('to_currency');
+      const convertedAmountInput = document.getElementById('converted_amount');
+      const convertBtn = document.getElementById('convert_btn');
+      // Add event listener to the convert button
+      convertBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        // Get the form data
+        const amount = parseFloat(amountInput.value);
+        const from_currency = fromCurrencySelect.value;
+        const to_currency = toCurrencySelect.value;
+        // Make the API call to convert the currency
+        fetch(`https://api.exchangerate-api.com/v4/latest/${from_currency}`).then(response => response.json()).then(data => {
+          const exchange_rate = data.rates[to_currency];
+          const converted_amount = amount * exchange_rate;
+          convertedAmountInput.value = converted_amount.toFixed(2);
+        }).catch(error => console.error(error));
+      });
+    </script>
+  </body>
+</html>                            
